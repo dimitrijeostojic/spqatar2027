@@ -61,7 +61,7 @@ jobs:
         with:
           name: webapp  # Name of the artifact
           path: ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
-
+ 
   # Second job: deploy the application to Azure
   deploy:
     name: Deploy to Azure
