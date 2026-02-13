@@ -12,7 +12,6 @@ on:
 env:
   AZURE_WEBAPP_NAME: spqatar2027
   DOTNET_VERSION: '8.0.x'
-  SOLUTION_PATH: 'SPQatar2027/SPQatar2027.slnx'
   API_PROJECT_PATH: 'SPQatar2027/SPQatar2027.csproj'
   PUBLISH_DIR: './publish'
   AZURE_WEBAPP_PACKAGE_PATH: './publish'
@@ -33,15 +32,15 @@ jobs:
           dotnet-version: ${{ env.DOTNET_VERSION }}
 
       - name: Restore
-        run: dotnet restore ${{ env.SOLUTION_PATH }}
+        run: dotnet restore ${{ env.API_PROJECT_PATH }}
 
       - name: Build
-        run: dotnet build ${{ env.SOLUTION_PATH }}
+        run: dotnet build ${{ env.API_PROJECT_PATH }}
           --configuration Release
           --no-restore
 
       - name: Test
-        run: dotnet test ${{ env.SOLUTION_PATH }}
+        run: dotnet test ${{ env.API_PROJECT_PATH }}
           --configuration Release
           --no-restore
           --no-build
