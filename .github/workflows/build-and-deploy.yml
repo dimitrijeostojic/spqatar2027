@@ -12,7 +12,7 @@ on:
 env:
   AZURE_WEBAPP_NAME: spqatar2027
   DOTNET_VERSION: '8.0.x'
-  SOLUTION_PATH: 'SPQatar2027/SPQatar2027.sln'
+  SOLUTION_PATH: 'SPQatar2027/SPQatar2027.slnx'
   API_PROJECT_PATH: 'SPQatar2027/SPQatar2027.csproj'
   PUBLISH_DIR: './publish'
   AZURE_WEBAPP_PACKAGE_PATH: './publish'
