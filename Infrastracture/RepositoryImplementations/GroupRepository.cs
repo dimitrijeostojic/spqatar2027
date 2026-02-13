@@ -1,0 +1,31 @@
+﻿using Domain.Entities;
+using Domain.RepositoryInterfaces;
+using Infrastracture.Data;
+using Microsoft.EntityFrameworkCore;
+
+namespace Infrastracture.RepositoryImplementations;
+
+internal sealed class GroupRepository : IGroupRepository
+{
+    private readonly ApplicationDbContext _context;
+
+    public GroupRepository(ApplicationDbContext context)
+    {
+        _context = context;
+    }
+
+    public async Task CreateGroupAsync(Group group, CancellationToken cancellationToken)
+    {
+        await _context.Groups.AddAsync(group, cancellationToken);
+    }
+
+    public async Task<List<Group>> GetAllAsync(CancellationToken cancellationToken = default)
+    {
+        return await _context.Groups.ToListAsync(cancellationToken);
+    }
+
+    public async Task<Group?> GetByPublicIdAsync(Guid publicId, CancellationToken cancellationToken = default)
+    {
+        return await _context.Groups.FirstOrDefaultAsync(x => x.PublicId == publicId, cancellationToken);
+    }
+}

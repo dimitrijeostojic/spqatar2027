@@ -1,0 +1,6 @@
+@SPQatar2027_HostAddress = http://localhost:5259
+
+GET {{SPQatar2027_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
