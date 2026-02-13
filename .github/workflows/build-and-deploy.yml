@@ -48,11 +48,8 @@ jobs:
 
 
       - name: Publish
-        run: dotnet publish ${{ env.API_PROJECT_PATH }}
-          --configuration Release
-          --no-restore
-          --no-build
-          --property:PublishDir=${{ env.PUBLISH_DIR }}
+        run: dotnet publish ${{ env.API_PROJECT_PATH }} -c Release -o ${{ env.PUBLISH_DIR }}
+
 
       # Store the published output as an artifact for later jobs
       - name: Publish Artifacts
