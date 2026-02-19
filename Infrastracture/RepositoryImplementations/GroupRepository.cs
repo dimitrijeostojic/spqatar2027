@@ -19,9 +19,20 @@ internal sealed class GroupRepository : IGroupRepository
         await _context.Groups.AddAsync(group, cancellationToken);
     }
 
+    public async Task<Group?> DeleteGroupAsync(Guid publicId, CancellationToken cancellationToken)
+    {
+        var group = await _context.Groups.FirstOrDefaultAsync(x => x.PublicId == publicId);
+        if (group is not null)
+        {
+            _context.Groups.Remove(group);
+            return group;
+        }
+        return null;
+    }
+
     public async Task<List<Group>> GetAllAsync(CancellationToken cancellationToken = default)
     {
-        return await _context.Groups.ToListAsync(cancellationToken);
+        return await _context.Groups.Include(g => g.Teams).ToListAsync(cancellationToken);
     }
 
     public async Task<Group?> GetByPublicIdAsync(Guid publicId, CancellationToken cancellationToken = default)

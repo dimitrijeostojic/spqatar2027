@@ -24,10 +24,6 @@
 
   <ItemGroup>
     <Folder Include="Abstractions\" />
-    <Folder Include="Team\Create\" />
-    <Folder Include="Team\GetAll\" />
-    <Folder Include="Team\GetById\" />
-    <Folder Include="Team\Update\" />
   </ItemGroup>
 
 </Project>

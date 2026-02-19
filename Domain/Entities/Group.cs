@@ -1,12 +1,9 @@
-﻿namespace Domain.Entities;
+﻿
+namespace Domain.Entities;
 
-public sealed class Group : Entity
+public sealed class Group(string groupName) : Entity
 {
-    public Group(string groupName)
-    {
-        GroupName = groupName;
-    }
-    public string GroupName { get; private set; }
+    public string? GroupName { get; private set; } = groupName;
     public ICollection<Team> Teams { get; set; } = [];
 
 
@@ -16,5 +13,11 @@ public sealed class Group : Entity
         {
             GroupName = groupName
         };
+    }
+
+    public Group UpdateGroupName(string groupName)
+    {
+        GroupName = groupName;
+        return this;
     }
 }

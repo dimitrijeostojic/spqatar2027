@@ -12,6 +12,7 @@ public static class DependencyInjection
     public static IServiceCollection AddInfrastracture(this IServiceCollection services)
     {
         services.AddScoped<IGroupRepository, GroupRepository>();
+        services.AddScoped<ITeamRepository, TeamRepository>();
         services.TryAddScoped<IUnitOfWork>(sp => sp.GetRequiredService<ApplicationDbContext>());
         return services;
     }

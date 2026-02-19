@@ -1,4 +1,5 @@
 ﻿using Application.Common;
+using Application.Team.GetAll;
 using Core;
 using Domain.RepositoryInterfaces;
 using MediatR;
@@ -21,7 +22,15 @@ public sealed class GetAllGroupsRequestHandler(IGroupRepository groupRepository)
            .Select(c => new GetAllGroupsDto
            {
                PublicId = c.PublicId,
-               GroupName = c.GroupName
+               GroupName = c.GroupName ?? string.Empty,
+               Teams = [.. c.Teams.Select(t => new GetAllTeamsDto
+                   {
+                       PublicId = t.PublicId,
+                       TeamName = t.TeamName ?? string.Empty,
+                       FlagIcon = t.FlagIcon,
+                       GroupName = t.Group?.GroupName ?? string.Empty
+                   }
+               )]
            })
            .ToList();
 
