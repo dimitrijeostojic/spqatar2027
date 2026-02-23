@@ -13,6 +13,7 @@ public static class DependencyInjection
     {
         services.AddScoped<IGroupRepository, GroupRepository>();
         services.AddScoped<ITeamRepository, TeamRepository>();
+        services.AddScoped<IStadiumRepository, StadiumRepository>();
         services.TryAddScoped<IUnitOfWork>(sp => sp.GetRequiredService<ApplicationDbContext>());
         return services;
     }

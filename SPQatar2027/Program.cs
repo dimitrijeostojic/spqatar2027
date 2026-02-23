@@ -1,6 +1,7 @@
 using Application;
 using Infrastracture;
 using Infrastracture.Data;
+using Infrastracture.Seed;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -50,5 +51,12 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
+
+using (var scope = app.Services.CreateScope())
+{
+    var db = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+
+    await DbInitializer.SeedAsync(db);
+}
 
 app.Run();
