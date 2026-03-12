@@ -22,7 +22,7 @@ public sealed class MatchRepository(ApplicationDbContext context) : IMatchReposi
 
     public async Task<bool> ExistsStadiumConflict(int stadiumId, DateTime startTime, CancellationToken cancellationToken = default)
     {
-        var existsStadium = await _context.Matches.FirstOrDefaultAsync(m => m.StadiumId == stadiumId && m.StartTime == startTime, cancellationToken);
+        var existsStadium = await _context.Matches.FirstOrDefaultAsync(m => m.StadiumId == stadiumId && m.StartTime.Date.Day == startTime.Date.Day, cancellationToken);
         if (existsStadium == null)
         {
             return false;
@@ -32,8 +32,8 @@ public sealed class MatchRepository(ApplicationDbContext context) : IMatchReposi
 
     public async Task<bool> ExistsTeamConflict(int homeTeamId, int awayTeamId, DateTime startTime, CancellationToken cancellationToken = default)
     {
-        var existsHomeTeam = await _context.Matches.FirstOrDefaultAsync(m => m.HomeTeamId == homeTeamId && m.StartTime == startTime, cancellationToken);
-        var existsAwayTeam = await _context.Matches.FirstOrDefaultAsync(m => m.AwayTeamId == awayTeamId && m.StartTime == startTime, cancellationToken);
+        var existsHomeTeam = await _context.Matches.FirstOrDefaultAsync(m => m.HomeTeamId == homeTeamId && m.StartTime.Date.Day == startTime.Date.Day, cancellationToken);
+        var existsAwayTeam = await _context.Matches.FirstOrDefaultAsync(m => m.AwayTeamId == awayTeamId && m.StartTime.Date.Day == startTime.Date.Day, cancellationToken);
         if (existsHomeTeam != null || existsAwayTeam != null)
         {
             return true;
